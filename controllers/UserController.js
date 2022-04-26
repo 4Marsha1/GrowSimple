@@ -72,6 +72,7 @@ const registerUser = async (req, res) => {
     }
 }
 
+// GENERATING NEW JSON WEB TOKEN
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' })
 }
