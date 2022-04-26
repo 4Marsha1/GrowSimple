@@ -7,7 +7,31 @@ const User = require('../models/userModel');
 // @ROUTE           POST /api/users/
 // @ACCESS          PUBLIC
 const loginUser = asyncHandler(async (req, res) => {
-    res.json('Login User')
+    const { username, password } = req.body;
+    // Check if required arguments are passed
+    if (!username || !password) {
+        res.status(400)
+        throw new Error('Invalid Credentials!')
+    }
+    try {
+        // Find if username exists
+        const user = await User.findOne({ username });
+        if (!user) {
+            res.status(400);
+            throw new Error(`No user with ${username} exists!`)
+        }
+        // Check if password matches
+        if (user && await bcrypt.compare(password, user.password)) {
+            res.status(200).json({
+                username: user.username,
+                email: user.email,
+                token: generateToken(user.id)
+            })
+        }
+    } catch (err) {
+        res.status(400);
+        throw new Error("User Doesn't Exist")
+    }
 })
 
 // @DESC            REGISTER USER

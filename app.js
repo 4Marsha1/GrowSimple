@@ -13,6 +13,7 @@ connectdb();
 
 // ROUTES
 app.use('/api/users/', require('./routes/userRoutes'));
+app.use('/api/movies/', require('./routes/movieRoutes'));
 
 // ERROR HANDLER
 app.use(errorHandler)
