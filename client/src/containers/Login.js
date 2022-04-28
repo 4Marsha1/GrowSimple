@@ -1,6 +1,8 @@
 import LoginComponent from '../components/Auth/LoginComponent';
 import Navbar from '../components/Navbar'
 import { useState } from 'react';
+import { connect } from 'react-redux';
+import { loginUser } from '../redux/actions/auth';
 
 const Login = (props) => {
     const [user, setUser] = useState({
@@ -13,7 +15,11 @@ const Login = (props) => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // REDUX FOR LOGIN
+        if (!username || !password) {
+            alert('Incomplete Credentials');
+            return;
+        }
+        props.dispatch(loginUser(username, password))
     }
     return (
         <>
@@ -28,4 +34,10 @@ const Login = (props) => {
     )
 }
 
-export default Login
+const mapStateToProps = state => {
+    return {
+        token: state.authReducer.token
+    }
+}
+
+export default connect(mapStateToProps)(Login)

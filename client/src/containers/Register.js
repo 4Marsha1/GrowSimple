@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Navbar from '../components/Navbar'
 import RegisterComponent from '../components/Auth/RegisterComponent';
+import { connect } from 'react-redux';
+import { registerUser } from '../redux/actions/auth';
 
 const Register = (props) => {
     const [user, setUser] = useState({
@@ -13,7 +15,15 @@ const Register = (props) => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // REDUX FOR REGISTER
+        if (!name || !email || !password1 || !password2) {
+            alert('Incomplete Credentials');
+            return;
+        }
+        else if (password1 !== password2) {
+            alert('Passwords not match');
+            return;
+        }
+        props.dispatch(registerUser(name, email, password1))
     }
     return (
         <>
@@ -30,4 +40,10 @@ const Register = (props) => {
     )
 }
 
-export default Register
+const mapStateToProps = state => {
+    return {
+        token: state.authReducer.token
+    }
+}
+
+export default connect(mapStateToProps)(Register)
