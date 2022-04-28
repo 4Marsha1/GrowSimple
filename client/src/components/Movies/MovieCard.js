@@ -1,6 +1,6 @@
 import styles from './Movies.module.css'
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, rateMovieHandler }) => {
     const add0 = (value) => (value < 10 ? "0" : "") + value;
     let day = new Date(movie.release_date).getDate();
     day = add0(day);
@@ -24,7 +24,10 @@ const MovieCard = ({ movie }) => {
                 <span className={styles['runtime']}>Runtime: {movie.runtime}</span>
                 <span className={styles['budget']}>Budget: {movie.budget}</span>
                 <span className={styles['revenue']}>Revenue: {movie.revenue}</span>
-                <span className={styles['rating']}>Rating: {movie.ratings.length}</span>
+            </div>
+            <div className={styles['section']}>
+                <button className={styles['btn']} onClick={() => rateMovieHandler(movie._id)}>Rate this movie</button>
+                <button className={styles['btn']}>View Rating</button>
             </div>
         </div>
     )

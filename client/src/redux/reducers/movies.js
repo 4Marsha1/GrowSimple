@@ -1,9 +1,11 @@
-import { GET_MOVIE_LIST_FAILED, GET_MOVIE_LIST_INITIATED, GET_MOVIE_LIST_SUCCESS } from "../actions/types"
+import { GET_MOVIE_LIST_FAILED, GET_MOVIE_LIST_INITIATED, GET_MOVIE_LIST_SUCCESS, RATE_MOVIE_FAILED, RATE_MOVIE_INITIATED, RATE_MOVIE_SUCCESS } from "../actions/types"
 
 const initialState = {
     fetching: null,
     movies: [],
     fetched: null,
+    rating: null,
+    rated: null,
     msg: ''
 }
 
@@ -27,6 +29,24 @@ const movieReducer = (state = initialState, action) => {
                 fetching: false,
                 fetched: false,
                 movies: [],
+                msg: action.payload
+            }
+        case RATE_MOVIE_INITIATED:
+            return {
+                ...state,
+                rating: true
+            }
+        case RATE_MOVIE_SUCCESS:
+            return {
+                ...state,
+                rating: false,
+                rated: true,
+            }
+        case RATE_MOVIE_FAILED:
+            return {
+                ...state,
+                rating: false,
+                rated: false,
                 msg: action.payload
             }
         default: return state

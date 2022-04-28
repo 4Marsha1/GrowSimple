@@ -4,6 +4,6 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const router = express.Router();
 
 router.route('/').get(authMiddleware, getMovies).post(authMiddleware, addMovie);
-router.route('/:id').get(authMiddleware, checkRating).put(authMiddleware, rateMovie)
+router.route('/:id').get(authMiddleware, checkRating).post(authMiddleware, rateMovie)
 
 module.exports = router
