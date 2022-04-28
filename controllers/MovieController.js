@@ -53,8 +53,19 @@ const rateMovie = asyncHandler(async (req, res) => {
 // @ACCESS          PRIVATE
 const checkRating = asyncHandler(async (req, res) => {
     const id = req.params.id;
-    res.status(200).json({ id })
-    // FILTER OUT THE MOVIE BY ID & SEND AVG RATING OF THE MOVIE
+    try {
+        // FIND THE MOVIE BY ID
+        const movie = await Movie.findById(id);
+        // IF ID DOESN'T MATCH, MOVIE DOESN'T EXIST
+        if (!movie) {
+            res.status(400);
+            throw new Error("This Movie doesn't Exist")
+        }
+        res.status(200).json(movie.ratings)
+    } catch (err) {
+        res.status(400);
+        throw new Error("Rating Couldn't be retrieved!")
+    }
 })
 
 // @DESC            ADD NEW MOVIE

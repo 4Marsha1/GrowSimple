@@ -38,7 +38,7 @@ export const rateMovie = (id, token) => async dispatch => {
                 'Authorization': `Bearer ${token}`
             }
         }
-        const res = await axios.post(`http://localhost:5000/api/movies/${id}`, config);
+        const res = await axios.put(`http://localhost:5000/api/movies/${id}`, config);
         const data = await res.data;
         dispatch({
             type: RATE_MOVIE_SUCCESS,
