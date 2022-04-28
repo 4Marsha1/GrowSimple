@@ -1,0 +1,30 @@
+.CONTAINER {
+	padding: 2rem 4rem;
+	background-color: #ccc;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2rem;
+}
+.HEADER {
+	font-size: 1.4rem;
+	font-weight: 600;
+}
+.CARDS {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+.CARD {
+	width: 500px;
+	background-color: #f2f4f5;
+	padding: 1rem 2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	font-size: 1.2rem;
+	font-weight: 500;
+}
